@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Puffy Match — Support</title>
+<link rel="icon" href="icon.png" />
+<link rel="apple-touch-icon" href="icon.png" />
+<meta name="theme-color" content="#ff7a2b" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, #ffd9a3 0%, transparent 50%),
+      radial-gradient(circle at 85% 80%, #ffb88a 0%, transparent 55%),
+      linear-gradient(135deg, #fff4e0 0%, #ffe7c8 100%);
+    color: #3a2410;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* floating fuzzy blobs */
+  .bg { position: fixed; inset: 0; overflow: hidden; z-index: -1; pointer-events: none; }
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(40px); opacity: 0.5;
+    animation: drift 18s ease-in-out infinite;
+  }
+  .blob:nth-child(1) { width: 320px; height: 320px; background: #ff9a4d; top: -60px; left: -80px; animation-delay: 0s; }
+  .blob:nth-child(2) { width: 280px; height: 280px; background: #ffb86b; bottom: -60px; right: -60px; animation-delay: -6s; }
+  .blob:nth-child(3) { width: 200px; height: 200px; background: #ffcd8a; top: 50%; left: 70%; animation-delay: -12s; }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.1); }
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-radius: 36px;
+    padding: 56px 44px 40px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow:
+      0 30px 80px rgba(255, 122, 43, 0.18),
+      0 8px 24px rgba(255, 122, 43, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    position: relative;
+  }
+
+  .icon-wrap {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 24px;
+    position: relative;
+    animation: bob 4s ease-in-out infinite;
+  }
+
+  .icon-wrap::after {
+    content: "";
+    position: absolute;
+    bottom: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 80%; height: 18px;
+    background: radial-gradient(ellipse, rgba(255, 122, 43, 0.35), transparent 70%);
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: -1;
+    animation: shadow 4s ease-in-out infinite;
+  }
+
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    box-shadow:
+      0 16px 40px rgba(255, 100, 30, 0.35),
+      0 4px 12px rgba(255, 100, 30, 0.2);
+    display: block;
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes shadow {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.4; transform: translateX(-50%) scale(0.85); }
+  }
+
+  h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #ff5a1f 0%, #ff8c42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tagline {
+    color: #8a5a3a;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 36px;
+  }
+
+  .divider {
+    width: 40px; height: 3px;
+    background: linear-gradient(90deg, #ff7a2b, #ffb86b);
+    border-radius: 3px;
+    margin: 0 auto 28px;
+  }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #b56a30;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: #5a3a22;
+    font-size: 15px;
+    margin-bottom: 28px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #ff7a2b 0%, #ff5a1f 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow:
+      0 10px 24px rgba(255, 90, 31, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 30px rgba(255, 90, 31, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .cta:active { transform: translateY(0); }
+
+  .cta svg {
+    width: 18px; height: 18px;
+    fill: currentColor;
+  }
+
+  .email {
+    display: block;
+    margin-top: 16px;
+    color: #a85a28;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .email:hover { color: #ff5a1f; }
+
+  .response-note {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 122, 43, 0.15);
+    font-size: 13px;
+    color: #a87858;
+  }
+
+  footer {
+    margin-top: 32px;
+    color: #b58a6a;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 44px 28px 32px; border-radius: 28px; }
+    h1 { font-size: 30px; }
+    .icon-wrap { width: 104px; height: 104px; }
+    .icon-wrap img { border-radius: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+</div>
+
+<div class="card">
+  <div class="icon-wrap">
+    <img src="icon.png" alt="Puffy Match" />
+  </div>
+
+  <h1>Puffy Match</h1>
+  <p class="tagline">Sort, match & relax with the puffies</p>
+
+  <div class="divider"></div>
+
+  <h2>Support</h2>
+  <p>Got a question, a bug to report, or just want to say hi? Send us a message and we'll get back to you as soon as we can.</p>
+
+  <a class="cta" href="mailto:ufukgny@yandex.com?subject=Puffy%20Match%20Support">
+    <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    Contact Support
+  </a>
+
+  <a class="email" href="mailto:ufukgny@yandex.com">ufukgny@yandex.com</a>
+
+  <div class="response-note">
+    We typically respond within 1–2 business days
+  </div>
+
+  <footer>
+    © 2026 ugallo · All rights reserved
+  </footer>
+</div>
+
+</body>
+</html>
